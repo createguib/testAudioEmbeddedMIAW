@@ -77,20 +77,15 @@
                             }
                         });
 
-                        // 3) Intentar iniciar el chat automáticamente
-                        if (embeddedservice_bootstrap.prechatAPI 
-                            && typeof embeddedservice_bootstrap.prechatAPI.launchChat === "function") {
-                            
-                            console.log("Llamando a prechatAPI.launchChat()");
-                            embeddedservice_bootstrap.prechatAPI.launchChat();
-        
-                        } else if (typeof embeddedservice_bootstrap.launchChat === "function") {
-                            
-                            console.log("Llamando a embeddedservice_bootstrap.launchChat()");
-                            embeddedservice_bootstrap.launchChat();
-        
+                        // 3 Lanzar el chat automáticamente con utilAPI ---
+                        if (embeddedservice_bootstrap.utilAPI 
+                            && typeof embeddedservice_bootstrap.utilAPI.launchChat === "function") {
+    
+                            console.log("Llamando a embeddedservice_bootstrap.utilAPI.launchChat()");
+                            embeddedservice_bootstrap.utilAPI.launchChat();
+    
                         } else {
-                            console.warn("No existe launchChat en esta versión de MIAW; el usuario seguirá viendo el botón 'Iniciar chat'.");
+                            console.warn("utilAPI.launchChat NO está disponible en esta versión.");
                         }
                     });
         
