@@ -7,6 +7,7 @@
     <h1>¡Bienvenido a la página de prueba!</h1>
     <p>El widget y variables de chat de Salesforce debería aparecer en esta página.</p>
 
+    //Estos datos son solo para verlos en la pagina test, no son necesarios que vayan:
     <h2>Datos del Cliente Precargados:</h2>
     <p>✅ Name: <strong id="mostrar_nombre">Cargando...</strong></p>
     <p>✅ Lastname: <strong id="mostrar_apellido">Cargando...</strong></p>
@@ -30,7 +31,7 @@
         // ===============================================
         // 2. MOSTRAR DATOS EN LA PÁGINA (ETIQUETAS)
         // ===============================================
-        
+        //Estos datos son solo para verlos en la pagina test, no son necesarios que vayan:
         document.getElementById('mostrar_nombre').textContent = datosCliente.nombre;
         document.getElementById('mostrar_apellido').textContent = datosCliente.apellido;
         document.getElementById('mostrar_correo').textContent = datosCliente.correo;
@@ -56,7 +57,7 @@
                             "POS"           : user.pos
                         });
 
-                        // 2) Campos VISIBLES en el prechat (si tu deployment los soporta)
+                        // 2) Campos VISIBLES en el prechat
                         embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
                             "_firstName": {
                                     "value": user.nombre,
