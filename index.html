@@ -39,6 +39,30 @@
         document.getElementById('mostrar_pos').textContent = datosCliente.pos;
         document.getElementById('mostrar_idioma').textContent = datosCliente.idioma;
         document.getElementById('mostrar_language').textContent = datosCliente.language;
+
+        function launchChat() {
+            console.log("launchChat() llamado");
+            if (!window.embeddedservice_bootstrap || !embeddedservice_bootstrap.utilAPI) {
+                console.error("utilAPI no está disponible todavía. ¿Se cargó el widget?");
+                return;
+            }
+
+            if (typeof embeddedservice_bootstrap.utilAPI.launchChat !== "function") {
+                console.error("utilAPI.launchChat NO está disponible en esta versión.");
+                return;
+            }
+
+            embeddedservice_bootstrap.utilAPI.launchChat()
+                .then(() => {
+                    console.log("Chat lanzado correctamente via utilAPI.launchChat()");
+                })
+                .catch((err) => {
+                    console.error("Error al lanzar el chat con utilAPI.launchChat():", err);
+                })
+                .finally(() => {
+                    console.log("Intento de lanzar el chat finalizado (success o error).");
+                });
+        }
         
         // **TU CÓDIGO DE SNIPPET DE CHAT DE SALESFORCE VA AQUÍ**
             function initEmbeddedMessaging() {
@@ -77,18 +101,10 @@
                             }
                         });
 
-                        if (embeddedservice_bootstrap.utilAPI 
-                          && typeof embeddedservice_bootstrap.utilAPI.launchChat === "function") {
-                    
-                            console.log("Programando utilAPI.launchChat en 800ms...");
-                            setTimeout(() => {
-                              embeddedservice_bootstrap.utilAPI.launchChat()
-                                .then(() => console.log("Chat lanzado OK"))
-                                .catch(err => console.error("Error en launchChat:", err));
-                            }, 800);
-                          } else {
-                            console.warn("utilAPI.launchChat NO está disponible.");
-                          }
+                        // Esto se ejecuta SOLO cuando el usuario ya abrió la burbuja
+                        setTimeout(() => {
+                            launchChat();
+                        }, 800); // prueba 800ms, si falla prueba 1200ms
                     });
         
                     // Inicializa o Embedded Messaging
