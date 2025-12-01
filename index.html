@@ -38,6 +38,32 @@
         document.getElementById('mostrar_pos').textContent = datosCliente.pos;
         document.getElementById('mostrar_idioma').textContent = datosCliente.idioma;
         document.getElementById('mostrar_language').textContent = datosCliente.language;
+
+        function launchChat() {
+            console.log("launchChat() llamado");
+
+            if (!window.embeddedservice_bootstrap || !embeddedservice_bootstrap.utilAPI) {
+                console.error("utilAPI no está disponible todavía. ¿Se cargó el widget?");
+                return;
+            }
+
+            if (typeof embeddedservice_bootstrap.utilAPI.launchChat !== "function") {
+                console.error("utilAPI.launchChat NO está disponible en esta versión / deployment.");
+                return;
+            }
+
+            embeddedservice_bootstrap.utilAPI.launchChat()
+                .then(() => {
+                    console.log("Chat lanzado correctamente via utilAPI.launchChat()");
+                })
+                .catch((err) => {
+                    console.error("Error al lanzar el chat con utilAPI.launchChat():", err);
+                })
+                .finally(() => {
+                    console.log("Intento de lanzar el chat finalizado (success o error).");
+                });
+        }
+
         
         // **TU CÓDIGO DE SNIPPET DE CHAT DE SALESFORCE VA AQUÍ**
             function initEmbeddedMessaging() {
@@ -74,22 +100,16 @@
                                     "value": user.iata,
                                     "isEditableByEndUser":false
                             }
-                        });
-                        console.log("Loading Messaging now");
-                        setTimeout(() => {
-                            embeddedservice_bootstrap.utilAPI
-                                .launchChat()
-                                .then(() => {
-                                    console.log("Inside Launch Chat");
-                                })
-                                .catch(() => {
-                                    console.log("Inside Launch Chat catch Block");
-                                })
-                                .finally(() => {
-                                    console.log("Inside Launch Chat finally Block");
-                                });
-                        }, 2000);
-                        
+                        });                        
+                    });
+
+                    window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
+                    console.log("onEmbeddedMessagingButtonClicked fired (usuario hizo clic en el botón de chat)");
+
+                    // Dar un pequeño margen para que se abra/monte el cliente de chat internamente
+                    setTimeout(() => {
+                        launchChat();
+                    }, 2000); // ajusta 500/800/1000 ms según veas el comportamiento
                     });
         
                     // Inicializa o Embedded Messaging
