@@ -42,13 +42,15 @@
                     window.addEventListener("onEmbeddedMessagingReady", () => {            
                         console.log("Inside Prechat API!!");
         
-                        // Define campos ocultos no pré-chat
+                        // Campos OCULTOS de prechat: se envían al bot/flow, no los ve el usuario.
                         embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({           
-                            "Language": "Espanol",
-                            "Code_Language": "es",
-                            "POS": "CL",
-                            "IATA": "0"
-                        });
+                        "Language"      : "Espanol",                 // Ejemplo: literal
+                        "Code_Language" : datosCliente.idioma || "es",
+                        "POS"           : datosCliente.pais   || "CL",
+                        "IATA"          : datosCliente.id     || "0",
+                        "Email__c"      : datosCliente.correo || "",   // ejemplo de campo extra
+                        "Name__c"       : datosCliente.nombre || ""    // ejemplo de campo extra
+                    });
         
                     });
         
