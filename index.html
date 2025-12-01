@@ -16,11 +16,13 @@
     
     <script type='text/javascript'>
         var datosCliente = {
-            nombre: "github",
+            nombre: "git",
+            apellido: "hub",
             correo: "createguib@gmail.com",
-            id: "12345678",
-            pais: "CL",
-            idioma: "es"
+            iata: "12345678",
+            pos: "CL",
+            idioma: "Espanol",
+            language: "es"
         };
 
         // ===============================================
@@ -28,10 +30,12 @@
         // ===============================================
         
         document.getElementById('mostrar_nombre').textContent = datosCliente.nombre;
+        document.getElementById('mostrar_apellido').textContent = datosCliente.apellido;
         document.getElementById('mostrar_correo').textContent = datosCliente.correo;
-        document.getElementById('mostrar_id').textContent = datosCliente.id;
-        document.getElementById('mostrar_pais').textContent = datosCliente.pais;
+        document.getElementById('mostrar_iata').textContent = datosCliente.iata;
+        document.getElementById('mostrar_pos').textContent = datosCliente.pos;
         document.getElementById('mostrar_idioma').textContent = datosCliente.idioma;
+        document.getElementById('mostrar_language').textContent = datosCliente.language;
         
         // **TU CÓDIGO DE SNIPPET DE CHAT DE SALESFORCE VA AQUÍ**
             function initEmbeddedMessaging() {
@@ -45,21 +49,26 @@
 
                         // 1) Campos OCULTOS
                         embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({           
-                            "Language"      : "Espanol",
-                            "Code_Language" : user.idioma || "es",
-                            "POS"           : user.pais   || "CL",
-                            "IATA"          : user.id     || "0"
+                            "Language"      : user.idioma || "Espanol",
+                            "Code_Language" : user.language || "es",
+                            "POS"           : user.pais   || "CL"
                         });
 
                         // 2) Campos VISIBLES en el prechat (si tu deployment los soporta)
-                        // IMPORTANTE: "name" debe coincidir con el API Name configurado
                         if (embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields) {
                             embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields([
                                 {
                                     name      : "_FirstName",      // API Name del campo de prechat
                                     label     : "Nombre",
-                                    value     : user.nombre || "",
+                                    value     : user.nombre,
                                     required  : true,
+                                    readOnly  : false
+                                },
+                                {
+                                    name      : "_LastName",
+                                    label     : "Apellido",
+                                    value     : user.apellido,      // si quieres, luego separas nombre/apellido
+                                    required  : false,
                                     readOnly  : false
                                 },
                                 {
