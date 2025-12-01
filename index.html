@@ -77,10 +77,18 @@
                             }
                         });
 
-                        // 3 Lanzar el chat automáticamente con utilAPI ---
-                        console.log("Llamando a embeddedservice_bootstrap.utilAPI.launchChat()");
-                        embeddedservice_bootstrap.utilAPI.launchChat();
-                        
+                        if (embeddedservice_bootstrap.utilAPI 
+                          && typeof embeddedservice_bootstrap.utilAPI.launchChat === "function") {
+                    
+                            console.log("Programando utilAPI.launchChat en 800ms...");
+                            setTimeout(() => {
+                              embeddedservice_bootstrap.utilAPI.launchChat()
+                                .then(() => console.log("Chat lanzado OK"))
+                                .catch(err => console.error("Error en launchChat:", err));
+                            }, 800);
+                          } else {
+                            console.warn("utilAPI.launchChat NO está disponible.");
+                          }
                     });
         
                     // Inicializa o Embedded Messaging
