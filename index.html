@@ -78,15 +78,9 @@
                         });
 
                         // 3 Lanzar el chat automáticamente con utilAPI ---
-                        if (embeddedservice_bootstrap.utilAPI 
-                            && typeof embeddedservice_bootstrap.utilAPI.launchChat === "function") {
-    
-                            console.log("Llamando a embeddedservice_bootstrap.utilAPI.launchChat()");
-                            embeddedservice_bootstrap.utilAPI.launchChat();
-    
-                        } else {
-                            console.warn("utilAPI.launchChat NO está disponible en esta versión.");
-                        }
+                        console.log("Llamando a embeddedservice_bootstrap.utilAPI.launchChat()");
+                        embeddedservice_bootstrap.utilAPI.launchChat();
+                        
                     });
         
                     // Inicializa o Embedded Messaging
