@@ -9,6 +9,44 @@
 
     <script type='text/javascript'>
         // **TU CÓDIGO DE SNIPPET DE CHAT DE SALESFORCE VA AQUÍ**
+            function initEmbeddedMessaging() {
+                try {
+                    embeddedservice_bootstrap.settings.language = 'es'; // Idioma padrão do chat
+        
+                    // Espera o carregamento completo do componente para aplicar o CSS
+                    window.addEventListener("onEmbeddedMessagingReady", () => {            
+                        console.log("Inside Prechat API!!");
+        
+                        // Define campos ocultos no pré-chat
+                        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({           
+                            "Language": "Espanol",
+                            "Code_Language": "es",
+                            "POS": "CL",
+                            "IATA": "0"
+                        });
+        
+                    });
+        
+                    // Inicializa o Embedded Messaging
+                    embeddedservice_bootstrap.init(
+                        '00DVG0000066nAf',
+                        'Chat_Latam_Airlines_EC',
+                        'https://latamneworg--latamdev.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754',
+                        {
+                            scrt2URL: 'https://latamneworg--latamdev.sandbox.my.salesforce-scrt.com'
+                        }
+                    );
+        
+                } catch (err) {
+                    console.error('Error loading Embedded Messaging: ', err);
+                }
+            };
+        </script>
+
+        <script type='text/javascript' 
+                src='https://latamneworg--latamdev.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754/assets/js/bootstrap.min.js' 
+                onload='initEmbeddedMessaging()'>
+        </script>
         // Por ejemplo, el código de "Embedded Service Deployments"
     </script>
     </body>
