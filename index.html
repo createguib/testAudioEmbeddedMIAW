@@ -51,9 +51,9 @@
 
                         // 1) Campos OCULTOS
                         embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({           
-                            "Language"      : user.idioma || "Espanol",
-                            "Code_Language" : user.language || "es",
-                            "POS"           : user.pos   || "CL"
+                            "Language"      : user.idioma,
+                            "Code_Language" : user.language,
+                            "POS"           : user.pos
                         });
 
                         // 2) Campos VISIBLES en el prechat (si tu deployment los soporta)
@@ -68,6 +68,10 @@
                             },
                             "_email": {
                                     "value": user.correo,
+                                    "isEditableByEndUser":false
+                            },
+                            "IATA": {
+                                    "value": user.iata,
                                     "isEditableByEndUser":false
                             }
                         });
