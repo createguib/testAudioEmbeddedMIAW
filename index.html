@@ -76,6 +76,22 @@
                                     "isEditableByEndUser":false
                             }
                         });
+
+                        // 3) Intentar iniciar el chat automáticamente
+                        if (embeddedservice_bootstrap.prechatAPI 
+                            && typeof embeddedservice_bootstrap.prechatAPI.launchChat === "function") {
+                            
+                            console.log("Llamando a prechatAPI.launchChat()");
+                            embeddedservice_bootstrap.prechatAPI.launchChat();
+        
+                        } else if (typeof embeddedservice_bootstrap.launchChat === "function") {
+                            
+                            console.log("Llamando a embeddedservice_bootstrap.launchChat()");
+                            embeddedservice_bootstrap.launchChat();
+        
+                        } else {
+                            console.warn("No existe launchChat en esta versión de MIAW; el usuario seguirá viendo el botón 'Iniciar chat'.");
+                        }
                     });
         
                     // Inicializa o Embedded Messaging
