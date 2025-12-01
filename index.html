@@ -57,32 +57,20 @@
                         });
 
                         // 2) Campos VISIBLES en el prechat (si tu deployment los soporta)
-                        if (embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields) {
-                            embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields([
-                                {
-                                    name      : "_FirstName",      // API Name del campo de prechat
-                                    label     : "Nombre",
-                                    value     : user.nombre,
-                                    required  : true,
-                                    readOnly  : false
-                                },
-                                {
-                                    name      : "_LastName",
-                                    label     : "Apellido",
-                                    value     : user.apellido,      // si quieres, luego separas nombre/apellido
-                                    required  : false,
-                                    readOnly  : false
-                                },
-                                {
-                                    name      : "_Email",     // API Name del campo de prechat
-                                    label     : "Correo electrónico",
-                                    value     : user.correo || "",
-                                    required  : true,
-                                    readOnly  : false
-                                }
-                            ]);
-                        }
-        
+                        embeddedservice_bootstrap.prechatAPI.setVisiblePrechatFields({
+                            "_FirstName": {
+                                    "value": user.nombre,
+                                    "isEditableByEndUser":false,
+                            },
+                            "_LastName": {
+                                    "value": user.apellido,
+                                    "isEditableByEndUser":false,
+                            },
+                            "_Email": {
+                                    "value": user.correo,
+                                    "isEditableByEndUser":false,
+                            }
+                        });
                     });
         
                     // Inicializa o Embedded Messaging
