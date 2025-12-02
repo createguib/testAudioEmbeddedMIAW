@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <audio id="AudioId">
+	    <source src="notification_client.mp3" type="audio/mpeg">
+    </audio>
 <head>
     <title>Página de Prueba de Salesforce Chat</title>
 </head>
@@ -38,32 +41,6 @@
         document.getElementById('mostrar_pos').textContent = datosCliente.pos;
         document.getElementById('mostrar_idioma').textContent = datosCliente.idioma;
         document.getElementById('mostrar_language').textContent = datosCliente.language;
-
-        function launchChat() {
-            console.log("launchChat() llamado");
-
-            if (!window.embeddedservice_bootstrap || !embeddedservice_bootstrap.utilAPI) {
-                console.error("utilAPI no está disponible todavía. ¿Se cargó el widget?");
-                return;
-            }
-
-            if (typeof embeddedservice_bootstrap.utilAPI.launchChat !== "function") {
-                console.error("utilAPI.launchChat NO está disponible en esta versión / deployment.");
-                return;
-            }
-
-            embeddedservice_bootstrap.utilAPI.launchChat()
-                .then(() => {
-                    console.log("Chat lanzado correctamente via utilAPI.launchChat()");
-                })
-                .catch((err) => {
-                    console.error("Error al lanzar el chat con utilAPI.launchChat():", err);
-                })
-                .finally(() => {
-                    console.log("Intento de lanzar el chat finalizado (success o error).");
-                });
-        }
-
         
         // **TU CÓDIGO DE SNIPPET DE CHAT DE SALESFORCE VA AQUÍ**
             function initEmbeddedMessaging() {
@@ -106,11 +83,26 @@
                     window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
                     console.log("onEmbeddedMessagingButtonClicked fired (usuario hizo clic en el botón de chat)");
 
-                    // Dar un pequeño margen para que se abra/monte el cliente de chat internamente
-                    setTimeout(() => {
-                        launchChat();
-                    }, 2000); // ajusta 500/800/1000 ms según veas el comportamiento
-                    });
+                    // Inicializa la Conversation Sent Listener 
+                    window.addEventListener( "onEmbeddedMessageSent", ( event ) => {
+                    console.log( "START:: Conversation Sent" );
+                    console.log( "Page location is " + window.location.href );
+                    console.log( "Event detail: ", JSON.stringify( event.detail ) );
+
+                    // Obtenemos el detalle del evento para facilitar el acceso 
+                    const messageDetail = event.detail;
+                    // Accedemos al rol del remitente a través de la ruta: conversationEntry.sender.role 
+                    const senderRole = messageDetail.conversationEntry.sender.role;
+    
+                    if (senderRole === "Agent") {
+                        if (document.hidden) {
+                                let objSound = document.getElementById( "AudioId" );
+                                objSound.play();
+                        }
+                    }
+                    console.log( "END:: Conversation Sent" );
+                    } );
+                    // Finalización de Conversation Sent Listener 
         
                     // Inicializa o Embedded Messaging
                     embeddedservice_bootstrap.init(
