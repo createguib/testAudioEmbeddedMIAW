@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    
+    <audio id="AudioId">
+	    <source src="notification_client.mp3" type="audio/mpeg">
+    </audio>
 <head>
     <title>Página de Prueba de Salesforce Chat</title>
 </head>
@@ -77,9 +79,6 @@
                             }
                         });                        
                     });
-
-                    window.addEventListener("onEmbeddedMessagingButtonClicked", () => {
-                    console.log("onEmbeddedMessagingButtonClicked fired (usuario hizo clic en el botón de chat)");
 
                     // Inicializa la Conversation Sent Listener 
                     window.addEventListener( "onEmbeddedMessageSent", ( event ) => {
