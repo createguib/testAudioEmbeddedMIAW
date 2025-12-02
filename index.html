@@ -86,7 +86,16 @@
             function initEmbeddedMessaging() {
                 try {
                     embeddedservice_bootstrap.settings.language = 'es'; // Idioma padrão do chat
-        
+
+					// Hiding Chat Button on page load
+                    embeddedservice_bootstrap.settings.hideChatButtonOnLoad = true;                    
+                    //* START:: Conversation Opened Listener */
+                    window.addEventListener("onEmbeddedMessagingConversationOpened", (event) => {
+                        hideChatContainer();
+                    });
+                    //* END:: Conversation Opened Listener */
+
+					
                     // Espera o carregamento completo do componente para aplicar o CSS
                     window.addEventListener("onEmbeddedMessagingReady", () => {            
                         console.log("Inside Prechat API!!");
