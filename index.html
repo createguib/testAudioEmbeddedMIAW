@@ -2,45 +2,6 @@
 <html>
 <head>
     <title>Página de Prueba de Salesforce Chat</title>
-		<style>
-            .send-button {
-                background-color: #0078ff;
-                border: none;
-                color: white;
-                border-radius: 50%;
-                width: 36px;
-                height: 36px;
-                cursor: pointer;
-                font-size: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: background 0.2s;
-            }
-            .send-button:hover {
-                background-color: #005fd1;
-            }
-            /* --- CSS for Styling the Button --- */
-            .send-message-button {
-                background-color: #00008b;
-                color: white;
-                padding: 15px 30px;
-                font-size: 18px;
-                font-weight: bold;
-                cursor: pointer;
-                border: none;
-                display: inline-block;
-                text-align: center;
-                border-radius: 5px;
-                box-shadow: 0 0 0 2px white;
-                outline: 2px solid #00008b;
-            }
-            .send-message-button:hover {
-                background-color: #0000a0;
-            }
-        </style>
-
-	
 </head>
 <body>
     <audio id="AudioId">
@@ -86,27 +47,6 @@
             function initEmbeddedMessaging() {
                 try {
                     embeddedservice_bootstrap.settings.language = 'es'; // Idioma padrão do chat
-					//***********************************************************************************************
-					// Hiding Chat Button on page load
-                    embeddedservice_bootstrap.settings.hideChatButtonOnLoad = true;                    
-                    //* START:: Conversation Opened Listener */
-                    window.addEventListener("onEmbeddedMessagingConversationOpened", (event) => {
-                        hideChatContainer();
-                    });
-                    //* END:: Conversation Opened Listener */
-					//* START:: Conversation Closed Listener */
-                    window.addEventListener("onEmbeddedMessagingWindowClosed", (event) => {
-                        showChatContainer();
-                    });
-                    //* END:: Conversation Closed Listener */
-        
-                    //* START:: Button Created Listener */
-                    window.addEventListener("onEmbeddedMessagingButtonCreated", (event) => {
-                        showChatContainer();
-                    });
-                    //* END:: Button Created Listener */
-					//***********************************************************************************************
-
 					
                     // Espera o carregamento completo do componente para aplicar o CSS
                     window.addEventListener("onEmbeddedMessagingReady", () => {            
