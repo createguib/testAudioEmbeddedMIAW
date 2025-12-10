@@ -49,13 +49,13 @@
         
                     // Inicializa o Embedded Messaging
                     embeddedservice_bootstrap.init(
-                        '00DVG0000066nAf',
-                        'Chat_Latam_Airlines_EC',
-                        'https://latamneworg--latamdev.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754',
-                        {
-                            scrt2URL: 'https://latamneworg--latamdev.sandbox.my.salesforce-scrt.com'
-                        }
-                    );
+		                '00DU8000009ZkFz',
+		                'Chat_Latam_Airlines_EC',
+		                'https://latamneworg--latamuat.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754',
+		                {
+		                    scrt2URL: 'https://latamneworg--latamuat.sandbox.my.salesforce-scrt.com'
+		                }
+		            );
         
                 } catch (err) {
                     console.error('Error loading Embedded Messaging: ', err);
@@ -64,8 +64,7 @@
         </script>
 
         <script type='text/javascript' 
-                src='https://latamneworg--latamdev.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754/assets/js/bootstrap.min.js' 
-                onload='initEmbeddedMessaging()'>        
+                <script type='text/javascript' src='https://latamneworg--latamuat.sandbox.my.site.com/ESWChatLatamAirlinesEC1713540918754/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>       
         </script>
 	
     </body>
